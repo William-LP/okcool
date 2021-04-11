@@ -57,7 +57,8 @@ def is_not_a_wikipedia_recommendation(p) :
         "Vous pouvez partager vos connaissances",
         "Si vous disposez d'ouvrages ou d'articles de référence",
         "Quelles sources sont attendues",
-        "modifier - modifier le code"
+        "modifier - modifier le code",
+        "Vous pouvez aider en ajoutant des liens vers dans les articles relatifs au sujet"
         ]
     for reco in recommendations :    
         if reco in p :
