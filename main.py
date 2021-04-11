@@ -90,7 +90,12 @@ def get_fact_from_random_wiki_page() :
     if len(all_paragraphs) != 0 :
         for p in all_paragraphs:
             if is_a_good_paragraph(p.text) :
-                return clean_fact(p.text)
+                fact=clean_fact(p.text)
+                # one can't tweet text over 280 chars
+                if len(fact) > 280:
+                    get_fact_from_random_wiki_page()
+                else :
+                    return clean_fact(p.text)
             elif p == all_paragraphs[-1] :                    
                 get_fact_from_random_wiki_page()
             else :
