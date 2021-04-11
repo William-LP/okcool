@@ -13,3 +13,4 @@ python main.py
 
 - Clean page from useless infobox_vx or bandeau-container
 - Fix parentheseception regex match issue
+- Control tweets are 280 char' max before posting
