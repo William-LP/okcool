@@ -96,7 +96,7 @@ def get_fact_from_random_wiki_page() :
                 if len(fact) > 280:
                     get_fact_from_random_wiki_page()
                 else :
-                    return clean_fact(p.text)
+                    return fact
             elif p == all_paragraphs[-1] :                    
                 get_fact_from_random_wiki_page()
             else :
