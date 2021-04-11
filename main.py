@@ -1,6 +1,40 @@
 import requests
+import json
 from bs4 import BeautifulSoup
 import re
+import tweepy
+
+
+def tweet(fact):
+    with open('credential.json') as json_file:
+        data = json.load(json_file)
+        consumer_key = data['consumer_key']
+        consumer_secret = data['consumer_secret']
+        access_token = data['access_token']
+        access_token_secret = data['access_token_secret']
+
+
+    twitter_auth_keys = { 
+        "consumer_key"        : consumer_key,
+        "consumer_secret"     : consumer_secret,
+        "access_token"        : access_token,
+        "access_token_secret" : access_token_secret
+    }
+ 
+    auth = tweepy.OAuthHandler(
+            twitter_auth_keys['consumer_key'],
+            twitter_auth_keys['consumer_secret']
+            )
+    auth.set_access_token(
+            twitter_auth_keys['access_token'],
+            twitter_auth_keys['access_token_secret']
+            )
+    api = tweepy.API(auth)
+ 
+    tweet = fact
+    status = api.update_status(status=tweet) 
+
+
 
 
 def is_at_least_a_10_words_sentence(p) :
@@ -40,7 +74,7 @@ def clean_fact(p):
     # removing the content between parentheses (whatever)
     # ISSUE : there's sometimes parenthese within parethese #parentheception #(what(thefuck))
     # https://fr.wikipedia.org/wiki/Pierre_Oudaille
-    # p=(re.sub(r" ?\([^)]+\)", "", p))
+    p=(re.sub(r" ?\([^)]+\)", "", p))
     # removing notes between square brackets [whatever]
     p=(re.sub(r" ?\[[^)]+\]", "", p))
     return p
@@ -66,6 +100,4 @@ def get_fact_from_random_wiki_page() :
 
 
 
-
-
-print(get_fact_from_random_wiki_page())
+tweet(get_fact_from_random_wiki_page())
